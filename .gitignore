@@ -1,0 +1,17 @@
+# Compiled object files
+*.o
+
+# Executables
+*.out
+a.out
+myAssembler
+
+# Build directories
+build/
+bin/
+
+
+# Editor configuration
+.vscode/
+
+ishur_hagasha_beichur.png
