@@ -37,6 +37,17 @@ External symbol references are accumulated during assembly and written to the `.
 
 Errors are tracked through the assembler state. If errors are detected, output files are not generated.
 
+## Output Files
+
+For each valid input file, the assembler may generate:
+
+- `.am` — preprocessed source after macro expansion
+- `.obj` — assembled machine code
+- `.ent` — entry symbols, when present
+- `.ext` — external symbol references, when present
+
+Output files are not generated if assembly errors are detected.
+
 ## Performance Experiment
 
 After completing the original assembler, I wanted to test whether the fix-list design actually reduced the work required during reference resolution.
