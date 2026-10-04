@@ -1,0 +1,8 @@
+; Direct internal forward references, plus one backward reference.
+MAIN: mov TARGET, r1
+STEP1: add TARGET, r2
+STEP2: sub TARGET, r3
+STEP3: cmp TARGET, r4
+STEP4: mov TARGET, r5
+BACK: mov MAIN, r6
+TARGET: stop

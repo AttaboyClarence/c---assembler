@@ -1,3 +1,5 @@
+#ifndef PASSES_H
+#define PASSES_H
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
@@ -237,3 +239,4 @@ void check_Commas(AssemStrct * assem, char * line, int lineNumber);
 bool CompatibleWithNoArgs(AssemStrct * assem, const Operations * op, int lineNumber);
 
 void trimArgs(char * arg1, char * arg2);
+#endif
