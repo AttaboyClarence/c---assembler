@@ -86,6 +86,7 @@ make clean
 - `secondPass.c` — unresolved-reference patching and output generation
 - `file.c` — file-related utilities
 - `passes.h` — assembler structures and declarations
+- `examples/` — sample assembly source files
 - `benchmarks/` — comparison implementation and performance benchmark
 
 ## Background
