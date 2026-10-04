@@ -37,16 +37,6 @@ External symbol references are accumulated during assembly and written to the `.
 
 Errors are tracked through the assembler state. If errors are detected, output files are not generated.
 
-## Output Files
-
-For each valid input file, the assembler may generate:
-
-- `.am` — preprocessed source after macro expansion
-- `.obj` — assembled machine code
-- `.ent` — entry symbols, when present
-- `.ext` — external symbol references, when present
-
-Output files are not generated if assembly errors are detected.
 
 ## Performance Experiment
 
@@ -80,7 +70,7 @@ make
 Then run the executable with one or more assembly source files:
 
 ```bash
-./myAssembler example.as
+./myAssembler examples/example1
 ```
 
 To remove compiled object files and the executable:
