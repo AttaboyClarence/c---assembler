@@ -22,7 +22,7 @@ After the first pass is complete, the symbol table contains the required address
 
 The project uses several data structures to keep the assembler state organized and avoid global variables.
 
-A central `Assemstrct` structure contains the main assembler state, including:
+A central `AssemStrct` structure contains the main assembler state, including:
 
 - Symbol table
 - Fix list
@@ -36,6 +36,17 @@ The symbol table and macro table use hash tables, while linked lists are used wh
 External symbol references are accumulated during assembly and written to the `.ext` output file after reference resolution is complete.
 
 Errors are tracked through the assembler state. If errors are detected, output files are not generated.
+
+## Output Files
+
+For each valid input file, the assembler may generate:
+
+- `.am` — preprocessed source after macro expansion
+- `.obj` — assembled machine code
+- `.ent` — entry symbols, when present
+- `.ext` — external symbol references, when present
+
+Output files are not generated if assembly errors are detected.
 
 
 ## Performance Experiment
