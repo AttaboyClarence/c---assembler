@@ -5,11 +5,21 @@
 *.out
 a.out
 myAssembler
+benchmarks/benchmark
 
 # Build directories
 build/
 bin/
 
+# Generated assembler files
+*.am
+*.ob
+*.obj
+*.ent
+*.ext
+
+# Keep benchmark fixture
+!benchmarks/fixture.am
 
 # Editor configuration
 .vscode/
