@@ -139,7 +139,7 @@ void writeCharinArray(AssemStrct * assem,char * restOfLine, int lineNumber);
 /*We apply the correct A.R.E for each binary machine code.*/
 void applyARE(AssemStrct * assem, char * arg, int type);
 
-/*The second round goes througha linked list of 'labels' that at time of running were 
+/*The second round goes through a linked list of 'labels' that at time of running were 
 unknown. The linked list holds the label name, and a slot saved for that information,
 so the linkedlist will extract the info from the SymbolTable.   */
 void secondRound(char * fileName, AssemStrct * assem);
@@ -209,9 +209,7 @@ void addToExtrnList (AssemStrct * assem, linkedList * fixP);
 /*Adding all the unknown parameters that will later be defined as symbols. */
 void addToFixList(AssemStrct * assem,char * arg);
 
-/*Here is basicly the second pass. We go through the list, look via
-the symbolTable and insert at the index, where we left room in 
-the first pass.*/
+/*Patches unresolved references using the completed symbol table.*/
 void fixAndPatchList(AssemStrct *assem);
 
 /*Here we take from fix list and patch the binary inside the slot saved.*/
@@ -233,7 +231,7 @@ void freefixList(linkedList * node);
 
 void freeSymbolTable(Symbol * symbolTable[]);
 
-/*Based on the assignment 23. It's role is to find errors in the commas when parsing data integers  */
+/*It's role is to find errors in the commas when parsing data integers  */
 void check_Commas(AssemStrct * assem, char * line, int lineNumber);
 
 bool CompatibleWithNoArgs(AssemStrct * assem, const Operations * op, int lineNumber);

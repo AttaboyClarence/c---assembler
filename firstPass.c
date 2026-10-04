@@ -127,7 +127,6 @@ void parseAndCreateESymbol(AssemStrct * assem, char * word ,char * rest, int lin
         newSymbol=calloc(1,sizeof(Symbol));
         strcpy(newSymbol->name,symbolName);
         newSymbol->attribute[ENTRY]=true;
-        /*assem->numOfEntries++;*/
         newSymbol->value=PRE_ENTRY;
         insertSymbol(newSymbol,assem);
     }    
@@ -269,7 +268,6 @@ void writeInstructionInArray(AssemStrct * assem,const Operations * op, int sourc
     convertAddType(st,sourceType);
     convertAddType(dt,desType);
     if (makeRoom(&assem->instructionArray,&assem->dataArray,lineNumber)){
-        /*might have to change the index into IC++, have to see how it works out*/
         mp = &assem->instructionArray.item[assem->IC++];
         assem->instructionArray.size++;
         p = mp->word;
@@ -289,11 +287,10 @@ void writeInstructionInArray(AssemStrct * assem,const Operations * op, int sourc
 bool makeRoom(DynamicArray * arr1, DynamicArray * arrOther, int lineNumber){
 
     MachineCode *temp=NULL;
-    /* do we need to allocate memory? */
+   
     if (arr1->size<arr1->capacity)
         return true;
-
-    /* Is there enough RAM to allocate memory?*/
+    
     if (arr1->capacity*2+arrOther->capacity>=RAMSIZE){
         printf("ERROR IN LINE %d: There is no room for more machine code in RAM", lineNumber);
         return false;
@@ -319,7 +316,7 @@ void convertAddType(char * st,int addressType){
     for (i=0;i<ADDRESS_SIZE-1;i++){
         st[ADDRESS_SIZE-2-i]= ((addressType>>i)& 1) ? '1':'0';
         }
-    /*IF ITS A NEW LABEL THAT HASNT BEEN DONE- WE'LL STILL GET 01\0 BECAUSE ITS 5*/
+    
 }
 
 int addressType(AssemStrct * assem,char * arg, int lineNum){
@@ -348,10 +345,9 @@ int addressType(AssemStrct * assem,char * arg, int lineNum){
             return RELATIVE_ADDRESS;
             }
         s=s->next;   
-        } /*DONT THINK ALL THE ABOVE IS NEEDED==== maybe yes maybe no. we'll see*/
+        } 
         return PRE_DETECTED_RELETIVE;
     }
-    /*MUST ADD ANOTHER OPTION--- IF THE ARG IS A LABEL*/
      /*Direct*/
     index = hashFunct(arg); 
     s = assem->symbolTable[index]; 
@@ -412,7 +408,7 @@ int addressNum(AssemStrct * assem,char * arg, int lineNum, int addType){
         s = assem->symbolTable[index];
         while (s!=NULL){
         if (strcmp(arg,s->name)==0){
-            if (s->attribute[EXTERNAL]){ /* HERE AND DIRECT ADDRESSES I ADDED A.R.E EVEN THOUGH NOT THE BEST PLACE FOR IT -MILUIM*/
+            if (s->attribute[EXTERNAL]){ 
                 assem->instructionArray.item[assem->IC].ARE='E';
                 addToExtList(assem,s);
             }
@@ -453,7 +449,7 @@ void whichDestAddress(AssemStrct * assem, char  * arg, const Operations * op, in
             return;
         }
 
-        /*remeber to check brakets*/
+        
         if (makeRoom(&assem->instructionArray,&assem->dataArray,lineNumber)){
             addToFixList(assem,arg);
             return;
@@ -562,7 +558,6 @@ void isData(char * word, Symbol * symbol){
 
 int hashFunct(char * string){/*Using the polynomial rolling hash function*/
     unsigned int index=0;
-    /* might be good to have a skip spaces*/
     while (isspace(*string)){
         string++;
     }
@@ -638,7 +633,6 @@ void addToFixList(AssemStrct * assem,char * arg){
     }
 }
 
-/*MAYBE CREATE THESE AGAIN*/
 void parseAndWriteinArray(AssemStrct * assem ,char * nextWord ,char * restOfLine, int lineNumber){
     if (strcmp(nextWord,".data")==0){
         restOfLine = getRestOfLine(restOfLine);
@@ -653,15 +647,14 @@ void parseAndWriteinArray(AssemStrct * assem ,char * nextWord ,char * restOfLine
 
 void writeCharinArray(AssemStrct * assem,char * restOfLine, int lineNumber){  
     int num=0;
-    restOfLine = cropQuotes(restOfLine, lineNumber);
-    /*GO TO END OF LINE AND FIND THE FIRST " AND SEE IF PROPPER - STRCHR I THINK*/  
+    restOfLine = cropQuotes(restOfLine, lineNumber);  
     while(*restOfLine!='\0'){
         if (isspace(*restOfLine)){
             restOfLine++;
             continue;
         }     
         num = *restOfLine; 
-        convertNumToBinaryString(assem,num,lineNumber);/*Next time start here- with the conversion function*/
+        convertNumToBinaryString(assem,num,lineNumber);
     restOfLine++;    
     }   
     convertNumToBinaryString(assem,0,lineNumber);
@@ -708,7 +701,7 @@ void fixConversion(MachineCode * item,int inputNum){
         item->word[WORDLEN-2-i]= ((inputNum>>i)& 1) ? '1':'0';
     }
 }
-/*Copied with slight changes from my mySet assignment*/
+
 void check_Commas(AssemStrct* assem, char *line, int lineNumber){
     bool lastCharComma=false;
     char *p;

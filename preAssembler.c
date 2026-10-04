@@ -1,7 +1,7 @@
 # include "preAssembler.h"
 # include "file.h"
 
-bool preAssembler(char *filename){ /*changed from CHAR * preassembler to FILE * preassembler. dont know if correct check later*/
+bool preAssembler(char *filename){ 
     linkedlist * symbolList=NULL;
     Macro * arr[HASH_MACRO_SIZE]={0};   
     int n;
@@ -15,7 +15,7 @@ bool preAssembler(char *filename){ /*changed from CHAR * preassembler to FILE * 
         if (strcmp(word,"mcro")==0){
             Macro * macro=malloc(sizeof(Macro));    
             sscanf(line+n," %s",macro->name); 
-            insertMacro(arr, macro, fptr);/*creating a new macro*/
+            insertMacro(arr, macro, fptr);
             }
         /* else check if already macro, and then if so- read from it to newfile*/ 
         else{
@@ -111,8 +111,7 @@ void addLines(Macro * macro, FILE *fptr){
     char string[MAXLINELEN];
     char sthelper[MAXLINELEN];
     macro->firstLine=NULL;
-    while (fgets(string,MAXLINELEN,fptr)!=NULL){/* new function,*/
-                /*check if in hash table*/
+    while (fgets(string,MAXLINELEN,fptr)!=NULL){
         string[strcspn(string, "\n")] = '\0';
         sscanf(string, "%s",sthelper);        
         if (strcmp(sthelper,"mcroend")==0){
@@ -124,7 +123,7 @@ void addLines(Macro * macro, FILE *fptr){
                 newLine->next=NULL;
                 strcpy(newLine->content,string);
             }
-            if (macro->firstLine==NULL){ /*for some reason it jumps over even though firstline=null*/
+            if (macro->firstLine==NULL){ 
                 macro->firstLine=newLine;   
                 lastLine=newLine;
             }

@@ -134,7 +134,7 @@ void writeEntriesOnFile(FILE * fpEnt, Symbol * symbolTable []){
     }
         fclose(fpEnt);
 }
-/*HAVE TO SORT THINGS OUT WITH RELATIVE*/
+
 void fixAndPatchList(AssemStrct *assem){
     linkedList * fixP= assem->fixList;
     Symbol * sp=NULL;
